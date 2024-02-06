@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     @Query(value = "select * from users where id = ?1", nativeQuery = true)
-    UserModel getUser(int userId);
+    UserModel getUser(Long userId);
 }

@@ -5,9 +5,9 @@ import com.yapapp.Model.UserModel;
 
 public interface UserService {
 
-    public UserModel getUser(int userId);
+    public UserModel getUser(Long userId);
 
     public String addUser(UserDTO newUserDTO);
 
-    public String editUserDetails(int id, UserDTO editUser);
+    public String editUserDetails(Long id, UserDTO editUser);
 }

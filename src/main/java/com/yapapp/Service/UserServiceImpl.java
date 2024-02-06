@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
-    public UserModel getUser(int userId){
+    public UserModel getUser(Long userId){
 
         UserModel user = userRepository.getUser(userId);
         return user;
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public String editUserDetails(int id, UserDTO editUser){
+    public String editUserDetails(Long id, UserDTO editUser){
 
         String message="";
         UserModel user = userRepository.getUser(id);

@@ -2,7 +2,6 @@ package com.yapapp.Controllers;
 
 import com.yapapp.DTO.UserDTO;
 import com.yapapp.Model.UserModel;
-import com.yapapp.Repository.UserRepository;
 import com.yapapp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/getUser")
-    public UserModel getUser(@RequestParam("userId") int userId) throws Exception {
+    public UserModel getUser(@RequestParam("userId") Long userId) throws Exception {
 
         return userService.getUser(userId);
     }
@@ -27,7 +26,7 @@ public class UserController {
     }
 
     @PutMapping("/editUserDetails")
-    public String editUser(@RequestParam("userId") int id,@RequestBody UserDTO editUser) throws Exception {
+    public String editUser(@RequestParam("userId") Long id,@RequestBody UserDTO editUser) throws Exception {
 
         return userService.editUserDetails(id, editUser);
     }
