@@ -6,12 +6,9 @@ import jakarta.persistence.*;
 @Entity
 public class UserModel {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private Long id;
     private String emailId;
     private String firstName;
     private String lastName;
@@ -70,11 +67,11 @@ public class UserModel {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int userId) {
+    public void setId(Long userId) {
         this.id = userId;
     }
 
