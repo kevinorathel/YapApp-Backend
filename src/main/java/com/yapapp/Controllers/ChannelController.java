@@ -1,5 +1,6 @@
 package com.yapapp.Controllers;
 
+import com.yapapp.DTO.ChannelAdminDTO;
 import com.yapapp.DTO.ChannelDTO;
 import com.yapapp.Model.ChannelModel;
 import com.yapapp.Model.UserModel;
@@ -21,9 +22,15 @@ public class ChannelController {
         return channelService.getChannel(channelId);
     }
 
-    @PostMapping("/createChannel")
+    @PostMapping("/addChannel")
     public String createChannel(@RequestBody ChannelDTO newChannelDTO) throws Exception {
 
         return channelService.createChannel(newChannelDTO);
+    }
+
+    @GetMapping("/getChannelAdmin")
+    public ChannelAdminDTO getChannelAdmin(@RequestParam("channelId") Long channelId) throws Exception {
+
+        return channelService.getChannelAdmin(channelId);
     }
 }
