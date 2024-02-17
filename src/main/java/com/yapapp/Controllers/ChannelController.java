@@ -5,9 +5,10 @@ import com.yapapp.DTO.ChannelDTO;
 import com.yapapp.Model.ChannelModel;
 import com.yapapp.Model.UserModel;
 import com.yapapp.Service.ChannelService;
-import com.yapapp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/channel")
@@ -33,4 +34,17 @@ public class ChannelController {
 
         return channelService.getChannelAdmin(channelId);
     }
+
+    @GetMapping("/getUsersForChannel")
+    public List<UserModel> getUsersForChannel(@RequestParam("channelId") Long channelId) throws Exception {
+
+        return channelService.getUsersForChannel(channelId);
+    }
+
+    @PostMapping("/addUserToChannel")
+    public String addUserToChannel(@RequestBody Long userId, @RequestBody Long channelId) throws Exception {
+
+        return channelService.addUserToChannel(userId,channelId);
+    }
+
 }

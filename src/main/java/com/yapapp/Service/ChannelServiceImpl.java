@@ -2,13 +2,16 @@ package com.yapapp.Service;
 
 import com.yapapp.DTO.ChannelAdminDTO;
 import com.yapapp.DTO.ChannelDTO;
-import com.yapapp.DTO.UserDTO;
 import com.yapapp.Model.ChannelModel;
 import com.yapapp.Model.UserModel;
+import com.yapapp.Model.UserToChannelModel;
 import com.yapapp.Repository.ChannelRepository;
+import com.yapapp.Repository.UserRepository;
+import com.yapapp.Repository.UserToChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +19,12 @@ public class ChannelServiceImpl implements ChannelService{
 
     @Autowired
     ChannelRepository channelRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    UserToChannelRepository userToChannelRepository;
 
     public ChannelModel getChannel(Long channelId){
 
@@ -31,6 +40,7 @@ public class ChannelServiceImpl implements ChannelService{
             newChannel.setCode(newChannelDTO.getCode());
             newChannel.setAdminUserId(newChannelDTO.getAdminUserId());
             channelRepository.save(newChannel);
+            addUserToChannel(newChannelDTO.getAdminUserId(), newChannel.getId());
             message = "Success!";
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,5 +60,39 @@ public class ChannelServiceImpl implements ChannelService{
         }
 
         return adminUser;
+    }
+
+    public List<UserModel> getUsersForChannel(Long channelId){
+
+        List<UserModel> channelUsers = new ArrayList<>();
+        List<Long> usersInChannel = channelRepository.getUsersForChannel(channelId);
+        for(Long userId : usersInChannel){
+            UserModel user = userRepository.getUser(userId);
+            channelUsers.add(user);
+        }
+        return channelUsers;
+    }
+
+    public String addUserToChannel(Long userId, Long channelId){
+
+        String message = "";
+        UserModel user = userRepository.getUser(userId);
+        if(user == null){
+            message = "User not found!";
+            return message;
+        }
+        ChannelModel channel = getChannel(channelId);
+        if(channel == null){
+            message = "Channel not found!";
+            return message;
+        }
+        UserToChannelModel addUser = new UserToChannelModel();
+        addUser.setUserId(userId);
+        addUser.setChannelId(channelId);
+        userToChannelRepository.save(addUser);
+        message = "Added User to channel successfully!";
+
+        return message;
+
     }
 }
