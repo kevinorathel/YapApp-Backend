@@ -16,4 +16,7 @@ public interface ChannelRepository extends JpaRepository<ChannelModel, Long> {
             "left join users u on c.admin_user_id = u.id " +
             "where c.id = ?1", nativeQuery = true)
     List<Object[]> getChannelAdmin(Long channelId);
+
+    @Query(value = "select user_id from user_toChannel where channel_id = ?1", nativeQuery = true)
+    List<Long> getUsersForChannel(Long userId);
 }
