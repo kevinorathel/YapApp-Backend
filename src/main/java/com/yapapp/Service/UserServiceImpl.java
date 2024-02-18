@@ -6,6 +6,15 @@ import com.yapapp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -13,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
-    public UserModel getUser(Long userId){
+    public UserModel getUser(Long userId) {
 
         UserModel user = userRepository.getUser(userId);
         return user;
@@ -28,7 +37,8 @@ public class UserServiceImpl implements UserService {
             newUser.setEmailId(newUserDTO.getEmailId());
             newUser.setFirstName(newUserDTO.getFirstName());
             newUser.setLastName(newUserDTO.getLastName());
-            newUser.setPassword(newUserDTO.getPassword());
+            String password = AESUtilService.encryptPassword(newUserDTO.getPassword());
+            newUser.setPassword(password);
             newUser.setImageUrl(newUserDTO.getImageUrl());
 
             userRepository.save(newUser);
@@ -41,7 +51,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public String editUserDetails(Long id, UserDTO editUser){
+    public String editUserDetails(Long id, UserDTO editUser) {
 
         String message="";
         UserModel user = userRepository.getUser(id);
@@ -51,6 +61,7 @@ public class UserServiceImpl implements UserService {
             user.setLastName(editUser.getLastName() != null ? editUser.getLastName() : user.getLastName());
             user.setEmailId(editUser.getEmailId() != null ? editUser.getEmailId() : user.getEmailId());
             user.setImageUrl(editUser.getImageUrl() != null ? editUser.getImageUrl() : user.getImageUrl());
+            user.setPassword(editUser.getPassword() != null ? AESUtilService.encryptPassword(editUser.getPassword()) : user.getPassword());
 
             userRepository.save(user);
             message = "User Updated successfully!";
@@ -60,4 +71,6 @@ public class UserServiceImpl implements UserService {
         }
         return message;
     }
+
+
 }
