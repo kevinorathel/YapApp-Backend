@@ -67,7 +67,7 @@ public class ChannelServiceImpl implements ChannelService{
         List<UserModel> channelUsers = new ArrayList<>();
         List<Long> usersInChannel = channelRepository.getUsersForChannel(channelId);
         for(Long userId : usersInChannel){
-            UserModel user = userRepository.getUser(userId);
+            UserModel user = userRepository.getUserById(userId);
             channelUsers.add(user);
         }
         return channelUsers;
@@ -76,7 +76,7 @@ public class ChannelServiceImpl implements ChannelService{
     public String addUserToChannel(Long userId, Long channelId){
 
         String message = "";
-        UserModel user = userRepository.getUser(userId);
+        UserModel user = userRepository.getUserById(userId);
         if(user == null){
             message = "User not found!";
             return message;
