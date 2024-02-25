@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/userLogin")
+    @GetMapping("/login")
     public Boolean userLogin(@RequestParam("userName") String userName, @RequestParam("password") String password) throws Exception {
 
         return userService.userLogin(userName, password);
@@ -25,7 +25,7 @@ public class UserController {
         return userService.getUser(userId);
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/signup")
     public String addUser(@RequestBody UserDTO newUserDTO) throws Exception {
 
          return userService.addUser(newUserDTO);

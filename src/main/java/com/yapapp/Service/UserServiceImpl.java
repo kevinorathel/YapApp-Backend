@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     public String editUserDetails(Long id, UserDTO editUser) {
 
         String message="";
-        UserModel user = userRepository.getUser(id);
+        UserModel user = userRepository.getUserById(id);
         if(user != null){
             user.setUserName(editUser.getUserName() != null ? editUser.getUserName() : user.getUserName());
             user.setFirstName(editUser.getFirstName() != null ? editUser.getFirstName() : user.getFirstName());
