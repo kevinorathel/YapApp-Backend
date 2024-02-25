@@ -24,8 +24,21 @@ public class UserServiceImpl implements UserService {
 
     public UserModel getUser(Long userId) {
 
-        UserModel user = userRepository.getUser(userId);
+        UserModel user = userRepository.getUserById(userId);
         return user;
+    }
+
+    public Boolean userLogin(String userName, String password){
+
+        Boolean status = false;
+        UserModel user = userRepository.getUserByUsername(userName);
+        if(user != null){
+            String decryptedPassword = AESUtilService.decryptPassword(user.getPassword());
+            if(password == decryptedPassword){
+                status = true;
+            }
+        }
+        return status;
     }
 
     public String addUser(UserDTO newUserDTO){

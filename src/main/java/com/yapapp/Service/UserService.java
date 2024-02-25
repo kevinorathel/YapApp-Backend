@@ -17,5 +17,7 @@ public interface UserService {
 
     public String addUser(UserDTO newUserDTO);
 
+    public Boolean userLogin(String userName, String password);
+
     public String editUserDetails(Long id, UserDTO editUser) throws InvalidAlgorithmParameterException, IllegalBlockSizeException, NoSuchPaddingException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidKeySpecException;
 }

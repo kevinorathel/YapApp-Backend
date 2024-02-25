@@ -13,6 +13,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/userLogin")
+    public Boolean userLogin(@RequestParam("userName") String userName, @RequestParam("password") String password) throws Exception {
+
+        return userService.userLogin(userName, password);
+    }
+
     @GetMapping("/getUser")
     public UserModel getUser(@RequestParam("userId") Long userId) throws Exception {
 
