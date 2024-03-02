@@ -1,11 +1,11 @@
-package com.yapapp.Service;
+package com.yapapp.Util;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.util.Base64;
 
-public class AESUtilService {
+public class AESUtil {
 
     private static String encryptionKey = System.getenv("ENCRYPTION_KEY");
     private static final String ALGORITHM = "AES";

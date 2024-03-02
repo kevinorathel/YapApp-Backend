@@ -1,14 +1,16 @@
 package com.yapapp.Service;
 
-import com.yapapp.Constants;
+import com.yapapp.Util.Constants;
 import com.yapapp.Model.UserModel;
 import com.yapapp.Model.UserStatusIndicatorModel;
 import com.yapapp.Repository.UserStatusIndicatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserStatusIndicatorServiceImpl implements  UserStatusIndicatorService{
 
     @Autowired
@@ -16,8 +18,6 @@ public class UserStatusIndicatorServiceImpl implements  UserStatusIndicatorServi
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-    @Autowired
-    private Constants constants;
 
     public List<UserModel> getOnlineUsers(){
 
@@ -43,9 +43,9 @@ public class UserStatusIndicatorServiceImpl implements  UserStatusIndicatorServi
 
             UserStatusIndicatorModel userStatus = userStatusIndicatorRepository.getUserStatusIndicator(userId);
             if(status.equalsIgnoreCase("Online")){
-                userStatus.setStatus(constants.USER_STATUS_ONLINE);
+                userStatus.setStatus(Constants.USER_STATUS_ONLINE);
             }else{
-                userStatus.setStatus(constants.USER_STATUS_OFFLINE);
+                userStatus.setStatus(Constants.USER_STATUS_OFFLINE);
             }
             userStatusIndicatorRepository.save(userStatus);
             message = "Success";
@@ -55,9 +55,9 @@ public class UserStatusIndicatorServiceImpl implements  UserStatusIndicatorServi
             UserStatusIndicatorModel newUserStatus = new UserStatusIndicatorModel();
             newUserStatus.setUserId(user.getId());
             if(status.equalsIgnoreCase("Online")){
-                newUserStatus.setStatus(constants.USER_STATUS_ONLINE);
+                newUserStatus.setStatus(Constants.USER_STATUS_ONLINE);
             }else{
-                newUserStatus.setStatus(constants.USER_STATUS_OFFLINE);
+                newUserStatus.setStatus(Constants.USER_STATUS_OFFLINE);
             }
             userStatusIndicatorRepository.save(newUserStatus);
             message = "Success";
