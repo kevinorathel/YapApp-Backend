@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.yapapp</groupId>
 	<artifactId>YapApp</artifactId>
-	<version>0.0.10</version>
+	<version>0.0.11</version>
 	<name>YapApp</name>
 	<description>Backend for YapApp</description>
 	<properties>
@@ -36,6 +36,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
