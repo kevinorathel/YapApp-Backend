@@ -38,16 +38,23 @@ public class UserServiceImpl implements UserService {
         String message;
         try {
             UserModel newUser = new UserModel();
-            newUser.setUserName(newUserDTO.getUserName());
-            newUser.setEmailId(newUserDTO.getEmailId());
-            newUser.setFirstName(newUserDTO.getFirstName());
-            newUser.setLastName(newUserDTO.getLastName());
-            String password = AESUtil.encryptPassword(newUserDTO.getPassword());
-            newUser.setPassword(password);
-            newUser.setImageUrl(newUserDTO.getImageUrl());
 
-            userRepository.save(newUser);
-            message = "Success!";
+            UserModel user = userRepository.getUserByUsername(newUserDTO.getUserName());
+
+            if(user == null){
+                newUser.setUserName(newUserDTO.getUserName());
+                newUser.setEmailId(newUserDTO.getEmailId());
+                newUser.setFirstName(newUserDTO.getFirstName());
+                newUser.setLastName(newUserDTO.getLastName());
+                String password = AESUtil.encryptPassword(newUserDTO.getPassword());
+                newUser.setPassword(password);
+
+                userRepository.save(newUser);
+                message = "Success!";
+            }else{
+                message = "Username already taken";
+            }
+
             return message;
         } catch (Exception e) {
             e.printStackTrace();
