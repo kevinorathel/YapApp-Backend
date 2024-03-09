@@ -39,6 +39,7 @@ public class ChannelServiceImpl implements ChannelService{
             newChannel.setName(newChannelDTO.getName());
             newChannel.setCode(newChannelDTO.getCode());
             newChannel.setAdminUserId(newChannelDTO.getAdminUserId());
+            newChannel.setIsGroup(newChannelDTO.getIsGroup());
             channelRepository.save(newChannel);
             addUserToChannel(newChannelDTO.getAdminUserId(), newChannel.getId());
             message = "Success!";
