@@ -6,6 +6,8 @@ public class ChannelDTO {
     private String name;
     private String code;
     private Long adminUserId;
+    private Boolean isGroup;
+
 
     public Long getId() {
         return id;
@@ -37,5 +39,13 @@ public class ChannelDTO {
 
     public void setAdminUserId(Long adminUserId) {
         this.adminUserId = adminUserId;
+    }
+
+    public Boolean getIsGroup() {
+        return isGroup;
+    }
+
+    public void setIsGroup(Boolean group) {
+        isGroup = group;
     }
 }
