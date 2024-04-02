@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
         UserModel user = userRepository.getUserByUsername(userName);
         if(user != null){
             String decryptedPassword = AESUtil.decryptPassword(user.getPassword());
-            if(password == decryptedPassword){
+            if(password.equals(decryptedPassword)){
                 status = true;
             }
         }
