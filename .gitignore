@@ -28,7 +28,11 @@
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-/src/main/resources/application.properties
+**/src/main/resources/application.properties
+**/target/*
+
+# Except .jar files
+!**/target/*.jar
 
 ### VS Code ###
 .vscode/
