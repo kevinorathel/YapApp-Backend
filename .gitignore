@@ -2,6 +2,7 @@
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+src/main/resources/
 
 ### STS ###
 .apt_generated
@@ -19,7 +20,7 @@
 *.ipr
 
 ### NetBeans ###
-/Dockerfile
+
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -29,9 +30,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 **/src/main/resources/
-**/target/*
+target/*
+
 # Except .jar files
-!**/target/*.jar
+!target/*.jar
 
 ### VS Code ###
 .vscode/
